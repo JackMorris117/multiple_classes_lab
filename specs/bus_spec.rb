@@ -57,7 +57,11 @@ class BusTest < MiniTest::Test
     end
 
     def test_add_people_to_bus_from_queue()
-        
+        @busstop.add_person_to_queue(@person2)
+        @busstop.remove_person_from_queue(@person2)
+        @bus.pick_up(@person2)
+        assert_equal(0, @busstop.queue().count())
+        assert_equal(1, @bus.number_of_passengers())
     end
 
 

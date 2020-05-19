@@ -28,6 +28,9 @@ class Bus
         @passengers.clear()
     end
 
-
+    def pick_up_from_stop(bus_stop)
+        person_picked_up = bus_stop.queue.shift()
+        pick_up(person_picked_up)
+    end
 
 end
