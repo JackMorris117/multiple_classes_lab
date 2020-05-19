@@ -4,13 +4,19 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative ('../bus')
 require_relative ('../person')
+require_relative ('../bus_stop')
 
+# ------------------------------------------------------------------
 
 class BusTest < MiniTest::Test
 
     def setup()
         @bus = Bus.new(14, :granton)
-        @person = Person.new("Sam", 420)
+        @busstop = BusStop.new(:town)
+
+        @person1 = Person.new("Sam", 420)
+        @person2 = Person.new("Merry", 90)
+
     end
 
     def test_can_get_route_number()
@@ -28,5 +34,32 @@ class BusTest < MiniTest::Test
     def test_can_get_number_of_passengers()
         assert_equal(0, @bus.number_of_passengers())
     end
+
+    def test_bus_pickup()
+        @bus.pick_up(@person1)
+        assert_equal(1, @bus.number_of_passengers())
+    end
+
+    def test_bus_drop_off()
+        @bus.pick_up(@person1)
+        @bus.drop_off(@person1)
+        assert_equal(0, @bus.number_of_passengers())
+    end
+    
+    def test_empty_the_bus()
+        @bus.empty_the_bus()
+        assert_equal(0, @bus.number_of_passengers())
+    end
+
+    def test_can_add_to_bus_stop_queue()
+        @busstop.add_person_to_queue(@person1)
+        assert_equal(1, @busstop.queue().count())
+    end
+
+    def test_add_people_to_bus_from_queue()
+        
+    end
+
+
 
 end

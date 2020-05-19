@@ -16,4 +16,18 @@ class Bus
         return @passengers.size()
     end
 
+    def pick_up(person)
+        @passengers.push(person)
+    end
+
+    def drop_off(person)
+        @passengers.delete(person)
+    end
+
+    def empty_the_bus()
+        @passengers.clear()
+    end
+
+
+
 end
